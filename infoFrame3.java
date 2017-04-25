@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.*;
 
 
-public class infoFrame extends JFrame {
+public class infoFrame3 extends JFrame {
      JFrame iFrame = new JFrame();
     private JPanel iPanel;
     private JLabel logo;
@@ -19,12 +19,12 @@ public class infoFrame extends JFrame {
    
     //private ImageIcon visualizer; // not created yet
     
-    public infoFrame() {
+    public infoFrame3() {
         ArrayList<String> y = new ArrayList<String>();
         y.add("Puddles");
         y.add("Potholes");
         y.add("Construction");
-        parkinglot p = new parkinglot("Lot A", "6:30am - 11:00pm", 140, 75, 34, 
+        parkinglot p = new parkinglot("Lot C", "6:30am - 11:00pm", 140, 75, 34, 
                                       false, false, true, true, y);
         String pname = p.name;
 

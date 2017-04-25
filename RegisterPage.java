@@ -1,3 +1,4 @@
+//dominic
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -7,7 +8,7 @@ public class RegisterPage extends JFrame {
 
 public static void main(String[] args) {
 
-	
+ 
 RegisterPage frame = new RegisterPage();
 }
 
@@ -25,32 +26,33 @@ JTextField firstName = new JTextField(15);
 JTextField lastName = new JTextField(15);
 
 JButton submit = new JButton("Submit");
+JButton back = new JButton("Back");
 JPanel panel = new JPanel();
 
 RegisterPage(){
 
-//	
-//Create the Frame	
-//	
-	
-//Frame size and title	
+// 
+//Create the Frame 
+// 
+ 
+//Frame size and title 
 super("Registration Page");
 setSize(350,250);
 setLocation(500,280);
 panel.setLayout (null); 
 
 //sets coordinate positions of text and text boxes
-
-//text boxes
+//(x,y,x1,y1) x,y= position x1,y1=size
+//text box positios
 user.setBounds(110,10,150,20);
 pass.setBounds(110,45,150,20);
 firstName.setBounds(110,85,150,20);
 lastName.setBounds(110,120,150,20);
 
-//submit
-submit.setBounds(130,170,80,20);
-
-//text
+//button positions
+submit.setBounds(170,170,80,20);
+back.setBounds(30,170,80,20);
+//text position
 userLabel.setBounds(30,10,80,20);
 passLabel.setBounds(30,45,80,20);
 firstLabel.setBounds(30,85,80,20);
@@ -59,6 +61,7 @@ lastLabel.setBounds(30,120,80,20);
 
 //add "parts" to the window
 panel.add(submit);   //add the "submit" button
+panel.add(back);
 
 //text boxes
 panel.add(user);   //add the username text box
@@ -77,8 +80,20 @@ getContentPane().add(panel);
 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 setVisible(true);
 actionlogin();
-}
 
+  back.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+      button3ActionPerformed(  );
+      }});   
+
+
+}
+  private  void button3ActionPerformed() {
+          login.main(new String[0]);
+          //dummyFrame x = new dummyFrame(); 
+          dispose(); 
+      }
+  
 public void actionlogin(){
 submit.addActionListener(new ActionListener() {
 public void actionPerformed(ActionEvent ae) {
@@ -89,7 +104,8 @@ userNames.add(testName);
 //String pw = pass.getText(); //supposed to use getPassword()?
                                 //not sure how to implement this
 if(!(userNames.contains(userEntry))) { //if user is in database
-NextFrame successWindow = new NextFrame();
+  
+ParkingInfoPage successWindow = new ParkingInfoPage();
 successWindow.setVisible(true);  //go to next frame
 dispose();
 } 

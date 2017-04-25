@@ -15,7 +15,13 @@ public class ResetPassword extends JPanel {
   private static final Font FRANKLIN = new Font("Franklin Gothic Book", Font.PLAIN, 12);
   
   public ResetPassword() {
+    this(new JFrame());
+  }
+  
+  public ResetPassword(JFrame f) {
     super(new GridBagLayout());
+    
+    frame = f;
     
     jLabel1 = new JLabel("Please enter the email address associated with your account:");
     jLabel1.setForeground(Color.WHITE);
@@ -39,9 +45,9 @@ public class ResetPassword extends JPanel {
     button = new JButton("Back");
     button.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        frame.removeAll();
-        //add code to return to the login page
-        frame.pack();
+        login.main(new String[0]);
+        //frame.setVisible(false);
+        frame.dispose();
       }
     });
     

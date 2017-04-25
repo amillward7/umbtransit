@@ -6,7 +6,7 @@ public class ResetPasswordFrame extends JFrame {
   
   public ResetPasswordFrame() {
     super();
-    p = new ResetPassword();
+    p = new ResetPassword(this);
     add(p);
     pack();
     setBounds(300, 150, 450, 750);

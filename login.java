@@ -18,11 +18,15 @@ public class login {
 		JTextField usernameText = new JTextField(15);
 		JTextField passwordText = new JTextField(15);
 		JButton submit = new JButton("Log in");
+		JButton register = new JButton("Register");
+		JButton forgetpw = new JButton("Forget Password");
 		add(frame, usernameLabel, c, 0, 2, 1, 1);
 		add(frame, passwordLabel, c, 0, 4, 1, 1);
 		add(frame, usernameText, c, 2, 2, 1, 1);
 		add(frame, passwordText, c, 2, 4, 1, 1);
 		add(frame, submit, c, 0, 6, 1, 1);
+		add(frame, forgetpw, c, 2, 6, 1, 1);
+		add(frame, register, c, 0, 8, 1, 1);
 		
         frame.setVisible(true);
 	}

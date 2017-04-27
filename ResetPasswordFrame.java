@@ -1,6 +1,8 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/* This class is just a JFrame to contain ResetPassword, which is a JPanel. */
+
 public class ResetPasswordFrame extends JFrame {
   private JPanel p;
   

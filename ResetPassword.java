@@ -14,11 +14,11 @@ public class ResetPassword extends JPanel {
   private JButton button;
   private static final Font FRANKLIN = new Font("Franklin Gothic Book", Font.PLAIN, 12);
   
-  public ResetPassword() {
+  public ResetPassword() { //if no JFrame is specified
     this(new JFrame());
   }
   
-  public ResetPassword(JFrame f) {
+  public ResetPassword(JFrame f) { //preferred constructor
     super(new GridBagLayout());
     
     frame = f;
@@ -27,26 +27,27 @@ public class ResetPassword extends JPanel {
     jLabel1.setForeground(Color.WHITE);
     jLabel1.setFont(FRANKLIN);
     
+    //display waiting screen while sending email
     emailField = new JTextField(20);
     emailField.setFont(FRANKLIN);
     emailField.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         remove(emailField);
         jLabel1.setText("Please wait.");
-        //jLabel1.setIcon(new ImageIcon("name of icon goes here"));
         repaint();
         
         String emailAddress = emailField.getText();
         
+        //threading so that panel displays correctly while email is being sent
         new Thread(createRunnable(emailAddress)).start();
       }
     });
     
+    //button to return to login page
     button = new JButton("Back");
     button.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         login.main(new String[0]);
-        //frame.setVisible(false);
         frame.dispose();
       }
     });
@@ -126,13 +127,5 @@ public class ResetPassword extends JPanel {
       mex.printStackTrace();
       throw(mex);
     }
-  }
-  
-  public static void main(String[] args) {
-    javax.swing.SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        new ResetPassword().createAndShowGUI();
-      }
-    });
   }
 }

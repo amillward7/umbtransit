@@ -30,7 +30,16 @@ public class LoginHandler {
   //method to register/attempt to register a new user; returns true if successful, false otherwise
   public static boolean register(String emailAddress, String password) throws InvalidKeySpecException, IOException,
     NoSuchAlgorithmException {
-    //write code here to check if emailAddress is in DATABASE already and if so return false immediately
+    //make sure email not already registered
+    BufferedReader reader = new BufferedReader(new FileReader(DATABASE));
+    String currentLine;
+    while((currentLine = reader.readLine()) != null) {
+      String[] login = currentLine.split(" ");
+      if(emailAddress.equals(login[0])) {
+        reader.close();
+        return false;
+      }
+    }
     
     //salt and hash the password 
     byte[] salt = new byte[16];

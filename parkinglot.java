@@ -3,6 +3,8 @@ package project;
 import java.util.*;
 import java.io.*;
 import java.time.*;
+import java.awt.Graphics;
+import java.awt.Color;
 
 public class parkinglot {
     public ArrayList<String> myConditions;
@@ -15,7 +17,7 @@ public class parkinglot {
     public boolean requiresParkingPass;
     public boolean hasHandicapSpots;
     public boolean isOpen;
-    
+    public Graphics visualizer;
 
     public parkinglot() {
         this.name = "EMPTY PARKING LOT";
@@ -73,6 +75,10 @@ public class parkinglot {
             return "No handicap spots available for this parking lot.";
         }
     }
+
+    public String getPercentFill() {
+        return (capacity / currentFill * 100) + "";
+    }
     
     public String toString() {
         String x = "";
@@ -87,7 +93,7 @@ public class parkinglot {
         if (this.myConditions.isEmpty()) {
             return "No conditions specified for this parking lot.";
         }else {
-            x = "Conditions are: ";
+            //x = "Conditions are: ";
             for (int i = 0; i < this.myConditions.size(); i++) {
                 if (i == this.myConditions.size() - 1) {
                     x += (this.myConditions.get(i));
@@ -99,3 +105,12 @@ public class parkinglot {
         }
     }
 }
+
+/*class DisplayVisualizer extends Canvas {
+    public void paint(Graphics g) {
+        g.setColor(Color.RED);
+        g.fillArc(0, 0, 20, 20, 0, 0);
+        g.drawArc(0, 0, 100, 100, 0, 0);
+        g.drawString((Integer)currentFill.toString(), 0, 0);
+    }
+    }*/

@@ -14,15 +14,29 @@ public class login {
   GridBagConstraints c = new GridBagConstraints();
   c.anchor = GridBagConstraints.WEST;
   
-  JLabel usernameLabel = new JLabel("<html>Username:  <br></html>");
-  JLabel passwordLabel = new JLabel("<html>Password:  <br></html>");
-  JTextField usernameText = new JTextField(15);
-  JTextField passwordText = new JTextField(15);
-  JButton submit = new JButton("Log in");
+  final JLabel messageLabel = new JLabel();
+  final JLabel usernameLabel = new JLabel("<html>Username:  <br></html>");
+  final JLabel passwordLabel = new JLabel("<html>Password:  <br></html>");
+  final JTextField usernameText = new JTextField(15);
+  final JTextField passwordText = new JTextField(15);
+  final JButton submit = new JButton("Log in");
   submit.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
-      new ParkingInfoPage();
-      frame.dispose();
+      String username = usernameText.getText();
+      String password = passwordText.getText();
+      usernameText.setText("");
+      passwordText.setText("");
+      messageLabel.setText("Please wait...");
+      try {
+        if(LoginHandler.checkLogin(username, password)) {
+          new ParkingInfoPage();
+          frame.dispose();
+        } else {
+          messageLabel.setText("Incorrect username and/or password.");
+        }
+      } catch(Exception exception) {
+        
+      }
     }
   });
   JButton register = new JButton("Register");
@@ -39,6 +53,7 @@ public class login {
       frame.dispose();
     }
   });
+  add(frame, messageLabel, c, 0, 0, 4, 2);
   add(frame, usernameLabel, c, 0, 2, 1, 1);
   add(frame, passwordLabel, c, 0, 4, 1, 1);
   add(frame, usernameText, c, 2, 2, 1, 1);

@@ -76,8 +76,17 @@ public class parkinglot {
         }
     }
 
-    public String getPercentFill() {
-        return (capacity / currentFill * 100) + "";
+    public double getPercentFill() {
+        //System.out.println((double)(capacity / currentFill * 100) + "");
+        //return (double)(currentFill / capacity * 100);
+        return findPercentFill();
+    }
+
+    public double findPercentFill() {
+        double a = (double) capacity;
+        double b = (double) currentFill;
+        double c = b / a;
+        return c;
     }
     
     public String toString() {
@@ -104,7 +113,29 @@ public class parkinglot {
             return x;
         }
     }
+
+    /*public static void main(String[] args) {
+        ArrayList<String> y = new ArrayList<String>();
+        y.add("Puddles");
+        y.add("Potholes");
+        y.add("Construction");
+        parkinglot p = new parkinglot("Campus Center Garage",
+         "6:30am - 11:00pm", 140, 75, 34, false, false, true, true, y);
+        System.out.println(p.getPercentFill());
+        /*javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    //MyGui myGUI = new MyGui();
+                    //myGUI.createGUI();
+                    infoFrame bayside1 = new infoFrame();
+                }
+            });
+        //infoFrame bayside1 = new infoFrame();
+        //bayside1.repaint();
+        }
+    }*/
 }
+
+
 
 /*class DisplayVisualizer extends Canvas {
     public void paint(Graphics g) {

@@ -28,7 +28,7 @@ public class infoFrame extends JFrame {
         y.add("Puddles");
         y.add("Potholes");
         y.add("Construction");
-        parkinglot p = new parkinglot("Campus Center Garage", "6:30am - 11:00pm", 140, 75, 34, 
+        parkinglot p = new parkinglot("Campus Center Garage", "6:30am - 11:00pm", 140, 99, 34, 
                                       false, false, true, true, y);
         String pname = p.name;
         fill = ((double)p.currentFill / p.capacity);
@@ -46,12 +46,16 @@ public class infoFrame extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagConstraints gbc2 = new GridBagConstraints();
 
+        // SET LOGO ON LOGO PANEL
+        // TEXT: BLUE  |  BACKGROUND: GRAY
         logo                 = new JLabel("UMBTRANSIT", JLabel.CENTER);
         logo.setForeground(Color.BLUE);
         logoPanel.add(logo);
         logoPanel.setBackground(Color.GRAY);
         logoPanel.setPreferredSize(new Dimension(100, 15));
 
+        // SET BACK BUTTON ON TOP PANEL WITH GRIDBAGLAYOUT
+        // TEXT: BLUE  |  BACKGROUND: WHITE; BG STILL NOT WORKING
         JButton back = new JButton("Back");
         //iFrame.add(back);
         // back.setBounds(280,40,80,20);
@@ -79,6 +83,7 @@ public class infoFrame extends JFrame {
         topPanel.add(back, gbc2);
         topPanel.setBackground(Color.LIGHT_GRAY);
 
+        // SET PARKING LOT NAME ON TOP PANEL
         parkingLotName       = new JLabel(pname, JLabel.CENTER);
         gbc2.gridx = 0;
         gbc2.gridy = 1;
@@ -88,6 +93,7 @@ public class infoFrame extends JFrame {
         gbc2.fill = GridBagConstraints.BOTH;
         topPanel.add(parkingLotName, gbc2);
 
+        // SET MORE INFO ON BOTTOM PANEL WITH GRIDBAGLAYOUT
         parkingLotConditions = new JLabel(p.conditionsAsString(), JLabel.CENTER);
         handicapSpots        = new JLabel(p.getHandicapInformation(), JLabel.CENTER);
         hours                = new JLabel(p.hours, JLabel.CENTER);
@@ -110,6 +116,7 @@ public class infoFrame extends JFrame {
         bottomPanel.add(parkingLotConditions, gbc2);
         bottomPanel.setBackground(Color.LIGHT_GRAY);
 
+        // SET LOT VISUALIZER ON IPANEL WITH GRIDBAGLAYOUT
         LotVisualizer l = new LotVisualizer(fill);
         iPanel = new JPanel();
         gbc2.gridx = 0;
@@ -129,6 +136,7 @@ public class infoFrame extends JFrame {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.BOTH;
 
+        // ADD THE FOUR PANELS TO THE CONTAINER WITH GRIDBAGLAYOUT
         gbc.weightx = 0.1;
         gbc.weighty = 0.1;
         c.add(logoPanel, gbc);
@@ -143,6 +151,7 @@ public class infoFrame extends JFrame {
         gbc.gridy = 5;
         c.add(bottomPanel, gbc);
 
+        // PACK FRAME AND SET VISIBLE 
         iFrame.pack();
         iFrame.setVisible(true);   
     }
@@ -152,14 +161,28 @@ public class infoFrame extends JFrame {
         private static final long serialVersionUID = 1L;
 
         public LotVisualizer (double fill) {
-           this.fill = fill;
+           this.fill = fill; // GET CURRENT PARKINGLOT FILL
+           // SET TO 200,200 BECAUSE RADIUS OF VIS IS 200
            setPreferredSize(new Dimension(200, 200));
         }
 
         public void paintComponent(Graphics g) {       
         Graphics2D g2d = (Graphics2D)g;
-        super.paintComponent(g2d);
+        super.paintComponent(g2d); // PAINT ON THE JCOMPONENT
+             // SO WE CAN ADD THIS TO A JPANEL AND THEN TO CONTAINER
          
+        // GET CIRCLE DATA
+        // Outer circle has a radius of 200, indicating a full parking lot
+        // Inner circle has a radius of 200 * fill, where fill is calculated 
+        //   from parking lot data as: currentFill / capacity.  Meant to 
+        //   represent the degree of "fullness" a parking lot is currently at
+        // An empty parking lot is a full green circle
+        // A full parking lot is a full red circle.  
+        // A half-full parking lot is an inner red circle with a green ring 
+        //   outside of it, filling the area between the inner circle and 
+        //   the circle representing a full parking lot
+        // fillArc(..., 0, 360) is used to draw a circle - could have 
+        //   drawn circle via Ellipse
         int innerRad, outerRad, innerX, outerX, innerY, outerY;
         outerX = 0;
         outerY = 0;
@@ -180,7 +203,7 @@ public class infoFrame extends JFrame {
         }
     }
 
-    private  void button3ActionPerformed() {
+    private void button3ActionPerformed() {
         //ParkingInfoPage k= new ParkingInfoPage();
           //dummyFrame x = new dummyFrame(); 
           dispose(); 

@@ -28,8 +28,8 @@ public class LoginHandler {
   private static final String DATABASE  = "LoginDatabase.txt";
   
   //method to register/attempt to register a new user; returns true if successful, false otherwise
-  public static boolean register(String emailAddress, String password) throws InvalidKeySpecException, IOException,
-    NoSuchAlgorithmException {
+  public static boolean register(String emailAddress, String password, String firstName, String lastName) throws
+    InvalidKeySpecException, IOException, NoSuchAlgorithmException {
     //make sure email not already registered
     BufferedReader reader = new BufferedReader(new FileReader(DATABASE));
     String currentLine;
@@ -50,7 +50,8 @@ public class LoginHandler {
     //add the emailAddress, salt, and hash to the database
     //emailAddress, salt, and hash separated by spaces
     PrintWriter writer = new PrintWriter(new FileWriter(DATABASE, true));
-    writer.printf(emailAddress + " " + Base64.getEncoder().encodeToString(salt) + " " + hash + "%n");
+    writer.printf(emailAddress + " " + Base64.getEncoder().encodeToString(salt) + " " + hash + " " + firstName + " "
+                    + lastName + "%n");
     writer.close();
     return true;
   }

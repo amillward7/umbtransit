@@ -24,7 +24,7 @@ public class ResetPassword extends JPanel {
     
     frame = f;
     
-    jLabel1 = new JLabel("Please enter the email address associated with your account:");
+    jLabel1 = new JLabel("<html>Please enter the email address associated with your account:</html>");
     jLabel1.setForeground(UI.WHITE);
     jLabel1.setFont(UI.FG_TEXT);
     

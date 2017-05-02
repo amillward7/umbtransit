@@ -83,7 +83,8 @@ public class RegisterPage extends JFrame {
     submit.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
         try {
-          boolean success = LoginHandler.register(user.getText(), pass.getText());
+          boolean success = LoginHandler.register(user.getText(), pass.getText(), firstName.getText(),
+                                                  lastName.getText());
           if(success) {
             new ParkingInfoPage();
             dispose();

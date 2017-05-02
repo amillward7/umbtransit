@@ -8,11 +8,12 @@ public class ResetPasswordFrame extends JFrame {
   
   public ResetPasswordFrame() {
     super();
-    //setUndecorated(true);
+    setUndecorated(true);
     p = new ResetPassword(this);
     add(p);
     pack();
-    setBounds(300, 150, 450, 750);
+    setSize(UI.SIZE);
+    setLocation(UI.LOCATION);
     setVisible(true);
   }
 }

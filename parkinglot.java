@@ -3,6 +3,8 @@ package project;
 import java.util.*;
 import java.io.*;
 import java.time.*;
+import java.awt.Graphics;
+import java.awt.Color;
 
 public class parkinglot {
     public ArrayList<String> myConditions;
@@ -15,7 +17,7 @@ public class parkinglot {
     public boolean requiresParkingPass;
     public boolean hasHandicapSpots;
     public boolean isOpen;
-    
+    public Graphics visualizer;
 
     public parkinglot() {
         this.name = "EMPTY PARKING LOT";
@@ -73,6 +75,19 @@ public class parkinglot {
             return "No handicap spots available for this parking lot.";
         }
     }
+
+    public double getPercentFill() {
+        //System.out.println((double)(capacity / currentFill * 100) + "");
+        //return (double)(currentFill / capacity * 100);
+        return findPercentFill();
+    }
+
+    public double findPercentFill() {
+        double a = (double) capacity;
+        double b = (double) currentFill;
+        double c = b / a;
+        return c;
+    }
     
     public String toString() {
         String x = "";
@@ -87,7 +102,7 @@ public class parkinglot {
         if (this.myConditions.isEmpty()) {
             return "No conditions specified for this parking lot.";
         }else {
-            x = "Conditions are: ";
+            //x = "Conditions are: ";
             for (int i = 0; i < this.myConditions.size(); i++) {
                 if (i == this.myConditions.size() - 1) {
                     x += (this.myConditions.get(i));
@@ -98,4 +113,14 @@ public class parkinglot {
             return x;
         }
     }
+    /*public static void main(String[] args) {
+        ArrayList<String> y = new ArrayList<String>();
+        y.add("Puddles");
+        y.add("Potholes");
+        y.add("Construction");
+        parkinglot p = new parkinglot("Campus Center Garage",
+         "6:30am - 11:00pm", 140, 75, 34, false, false, true, true, y);
+        System.out.println(p.getPercentFill());
+        }
+    }*/
 }

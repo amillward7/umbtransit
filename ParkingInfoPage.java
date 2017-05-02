@@ -177,7 +177,7 @@ public class ParkingInfoPage extends JFrame {
       }
       private  void button1ActionPerformed() {
    
-      dummyFrame x = new dummyFrame(); 
+      //dummyFrame x = new dummyFrame(); 
       dispose();
       
       }

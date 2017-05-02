@@ -25,12 +25,12 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class LoginHandler {
   private static final String ALGORITHM = "PBKDF2WithHmacSHA512";
-  private static final String DATABASE  = "LoginDatabase";
+  private static final String DATABASE  = "LoginDatabase.txt";
   
   //method to register/attempt to register a new user; returns true if successful, false otherwise
   public static boolean register(String emailAddress, String password) throws InvalidKeySpecException, IOException,
     NoSuchAlgorithmException {
-    //make sure email not already registered
+    //make sure email not already registered
     BufferedReader reader = new BufferedReader(new FileReader(DATABASE));
     String currentLine;
     while((currentLine = reader.readLine()) != null) {
@@ -40,6 +40,7 @@ public class LoginHandler {
         return false;
       }
     }
+    reader.close();
     
     //salt and hash the password 
     byte[] salt = new byte[16];
@@ -73,6 +74,19 @@ public class LoginHandler {
     }
     
     //if the end of the file is reached without seeing the email address
+    reader.close();
+    return false;
+  }
+  //method to check whether a given emailAddress is in the database
+  public static boolean isInDatabase(String emailAddress) throws IOException {
+    BufferedReader reader = new BufferedReader(new FileReader(DATABASE));
+    String currentLine;
+    while((currentLine = reader.readLine()) != null) {
+      if(emailAddress.equals(currentLine.split(" ")[0])) {
+        reader.close();
+        return true;
+      }
+    }
     reader.close();
     return false;
   }

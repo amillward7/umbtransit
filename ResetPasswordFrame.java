@@ -8,6 +8,7 @@ public class ResetPasswordFrame extends JFrame {
   
   public ResetPasswordFrame() {
     super();
+    //setUndecorated(true);
     p = new ResetPassword(this);
     add(p);
     pack();

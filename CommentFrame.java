@@ -1,6 +1,6 @@
-
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class CommentFrame {
 
@@ -52,6 +52,20 @@ public class CommentFrame {
         pnlMain.add(pane, gbc);
 
         JButton btnSave = new JButton("Sumbit");
+        btnSave.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(pnlMain,
+                                "Thank your for your replying.",
+                                "Replying Successfully",
+                                JOptionPane.PLAIN_MESSAGE); 
+                System.exit(1);
+            }
+            
+        
+        });
+        
         gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.NONE;
@@ -61,6 +75,7 @@ public class CommentFrame {
         gbc.insets = new Insets(10, 10, 10, 0);
         gbc.weightx = 1;
         pnlMain.add(btnSave, gbc);
+        
 
         JButton btnCancel = new JButton("Back");
         gbc = new GridBagConstraints();
@@ -71,7 +86,16 @@ public class CommentFrame {
         gbc.insets = new Insets(10, 0, 10, 10);
         gbc.weightx = 1;
         pnlMain.add(btnCancel, gbc);
-
+        
+        btnCancel.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(1);
+            }
+            
+        
+        });
     }
 
     public JPanel getUI(){

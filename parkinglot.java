@@ -1,4 +1,4 @@
-package project;
+package sevendwarves;
 
 import java.util.*;
 import java.io.*;

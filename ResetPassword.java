@@ -1,3 +1,4 @@
+package sevendwarves;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -23,8 +24,9 @@ public class ResetPassword extends JPanel {
     super(new GridBagLayout());
     
     frame = f;
+    setBackground(UI.WARM_GRAY);
     
-    jLabel1 = new JLabel("Please enter the email address associated with your account:");
+    jLabel1 = new JLabel("Please enter the email address associated with your account, then press enter:");
     jLabel1.setForeground(UI.WHITE);
     jLabel1.setFont(UI.FG_TEXT);
     
@@ -35,15 +37,16 @@ public class ResetPassword extends JPanel {
     banner.setOpaque(true);
     
     //display waiting screen while sending email
-    emailField = new JTextField(20);
+    emailField = new JTextField(50);
     emailField.setFont(UI.FG_TEXT);
     emailField.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        String emailAddress = emailField.getText();
         remove(emailField);
         jLabel1.setText("Please wait.");
         repaint();
         
-        String emailAddress = emailField.getText();
+        
         
         //threading so that panel displays correctly while email is being sent
         new Thread(createRunnable(emailAddress)).start();
@@ -56,6 +59,8 @@ public class ResetPassword extends JPanel {
     button.setForeground(UI.WHITE);
     button.setFont(UI.FG_BUTTON);
     button.setOpaque(true);
+    button.setContentAreaFilled(true);
+    button.setBorderPainted(false);
     button.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         login.main(new String[0]);
@@ -63,7 +68,7 @@ public class ResetPassword extends JPanel {
       }
     });
     
-    setBackground(UI.WARM_GRAY);
+    
     
     c = new GridBagConstraints();
     
@@ -87,6 +92,8 @@ public class ResetPassword extends JPanel {
     c.fill = GridBagConstraints.NONE;
     c.weighty = 1;
     add(button, c);
+    button.setBackground(UI.BLUE);
+    //button.setForeground(UI.WHITE);
     
     setBorder(BorderFactory.createMatteBorder(6,6,6,6, Color.BLACK));
   }

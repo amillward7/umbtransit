@@ -26,6 +26,7 @@ public class infoFrame extends JFrame {
     
     public infoFrame(parkinglot p) {
         this.p = p;
+        //setBorder(BorderFactory.createMatteBorder(6,6,6,6,Color.BLACK));
         ArrayList<String> y = new ArrayList<String>();
         y.add("Puddles");
         y.add("Potholes");
@@ -35,7 +36,7 @@ public class infoFrame extends JFrame {
         String pname = p.name;
         fill = ((double)p.currentFill / p.capacity);
         iFrame = new JFrame("More Information about " + pname);
-        logoPanel = new JPanel();
+        
         topPanel = new JPanel();
         graphicsPanel = new JPanel();
         bottomPanel = new JPanel();
@@ -50,6 +51,7 @@ public class infoFrame extends JFrame {
 
         // SET LOGO ON LOGO PANEL
         // TEXT: BLUE  |  BACKGROUND: GRAY
+        logoPanel = new JPanel();
         logo                 = new JLabel("UMBTRANSIT", JLabel.CENTER);
         logo.setFont(new Font("Franklin gothic book heavy", Font.BOLD, 24));
         logo.setForeground(Color.WHITE);
@@ -171,21 +173,7 @@ public class infoFrame extends JFrame {
 
         public void paintComponent(Graphics g) {       
         Graphics2D g2d = (Graphics2D)g;
-        super.paintComponent(g2d); // PAINT ON THE JCOMPONENT
-             // SO WE CAN ADD THIS TO A JPANEL AND THEN TO CONTAINER
-         
-        // GET CIRCLE DATA
-        // Outer circle has a radius of 200, indicating a full parking lot
-        // Inner circle has a radius of 200 * fill, where fill is calculated 
-        //   from parking lot data as: currentFill / capacity.  Meant to 
-        //   represent the degree of "fullness" a parking lot is currently at
-        // An empty parking lot is a full green circle
-        // A full parking lot is a full red circle.  
-        // A half-full parking lot is an inner red circle with a green ring 
-        //   outside of it, filling the area between the inner circle and 
-        //   the circle representing a full parking lot
-        // fillArc(..., 0, 360) is used to draw a circle - could have 
-        //   drawn circle via Ellipse
+        super.paintComponent(g2d);
         int innerRad, outerRad, innerX, outerX, innerY, outerY;
         outerX = 0;
         outerY = 0;

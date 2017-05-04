@@ -58,24 +58,29 @@ public class LoginHandler {
   //method to check whether a given emailAddress and password are a valid login
   public static boolean checkLogin(String emailAddress, String password) throws InvalidKeySpecException, IOException,
     NoSuchAlgorithmException {
-    BufferedReader reader = new BufferedReader(new FileReader(DATABASE));
-    String currentLine;
+    try {
+      BufferedReader reader = new BufferedReader(new FileReader(DATABASE));
+      String currentLine;
     
-    //search through database one line at a time
-    while((currentLine = reader.readLine()) != null) {
-      String[] login = currentLine.split(" "); //break the line into emailAddress, salt, and hash
-      if(emailAddress.equals(login[0])) {
-        reader.close();
-        String hash = getHash(password, login[1]); //salt and hash given password
-        if(hash.equals(login[2])) //check just-salted-and-hashed password against stored hash
-          return true; //if hashes match
-        return false; //if hashes don't match, don't keep searching
+      //search through database one line at a time
+      while((currentLine = reader.readLine()) != null) {
+        String[] login = currentLine.split(" "); //break the line into emailAddress, salt, and hash
+        if(emailAddress.equals(login[0])) {
+          reader.close();
+          String hash = getHash(password, login[1]); //salt and hash given password
+          if(hash.equals(login[2])) //check just-salted-and-hashed password against stored hash
+            return true; //if hashes match
+          return false; //if hashes don't match, don't keep searching
+        }
       }
-    }
     
-    //if the end of the file is reached without seeing the email address
-    reader.close();
-    return false;
+      //if the end of the file is reached without seeing the email address
+      reader.close();
+      return false;
+    } catch (Exception e) {
+      System.out.println("INVALID LOGIN");
+      return false;
+    }
   }
   //method to check whether a given emailAddress is in the database
   public static boolean isInDatabase(String emailAddress) throws IOException {

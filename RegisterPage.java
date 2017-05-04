@@ -1,7 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
+import java.util.*;
+//import project.ParkingInfoPage;
 
 public class RegisterPage extends JFrame {
   
@@ -35,7 +36,7 @@ public class RegisterPage extends JFrame {
     
 //Frame size and title 
     super("Registration Page");
-    setSize(350,250);
+    setSize(400,500);
     setLocation(500,280);
     panel.setLayout (null); 
     

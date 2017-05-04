@@ -1,3 +1,5 @@
+//package project; 
+
 import javax.swing.*;
 import java.awt.*;
 import javax.imageio.*;
@@ -11,6 +13,12 @@ import java.awt.Graphics;
 import java.applet.Applet;
 import java.awt.geom.Rectangle2D;
 import javax.swing.BorderFactory;
+import java.util.*;
+import project.parkinglot;
+//import project.infoFrame;
+
+//import project.parkinglot;
+//import project.infoFrame;
 public class ParkingInfoPage extends JFrame {
   
      
@@ -36,12 +44,12 @@ public class ParkingInfoPage extends JFrame {
       Font font = new Font("franklin gothic book", Font.BOLD, 12);
       JLabel banner = new JLabel("<html><font color = white>UMass Boston</font>", SwingConstants.CENTER);
        
-      setUndecorated(true);
+      //setUndecorated(true);
       getRootPane().setBorder(BorderFactory.createMatteBorder(6,6,6,6,Color.BLACK));
       font(banner, font); 
     
-      setSize(250,400);
-      setLocation(500,280);
+      setSize(400,500);
+      //setLocation(500,280);
       //setVisible(true);
       panel.setLayout(null); 
       
@@ -55,10 +63,10 @@ public class ParkingInfoPage extends JFrame {
       JButton a = new JButton();
       a.setFocusPainted(false);
       a.setForeground(new Color(0,90,139));
-      a.setText("<html><center>"+ "Lot A" +"<br/>"+ spacesAvailableLotA + " Spaces available");
+      a.setText("<html><center>"+ "Center Center Lot" +"<br/>"+ spacesAvailableLotA + " Spaces available");
       a.setFont(font);
       a.setBackground(Color.WHITE);
-      a.setBorderPainted(false);
+      //a.setBorderPainted(false);
        setParkingIcon(a,spacesAvailableLotA ,MAX_CAPACITY_A);
  
       a.addActionListener(new java.awt.event.ActionListener() {
@@ -68,41 +76,41 @@ public class ParkingInfoPage extends JFrame {
       
       JButton b = new JButton();
       b.setForeground(new Color(0,90,139));
-      b.setText("<html><center>"+ "Lot B" +"<br/>"+ spacesAvailableLotB + " Spaces available");
+      b.setText("<html><center>"+ "Clark Athletic Center Lot" +"<br/>"+ spacesAvailableLotB + " Spaces available");
       b.setFont(font);    
       b.setBackground(Color.WHITE);
-      b.setBorderPainted(false);
-   setParkingIcon(b,spacesAvailableLotB ,MAX_CAPACITY_B);
+      //b.setBorderPainted(false);
+      setParkingIcon(b,spacesAvailableLotB ,MAX_CAPACITY_B);
  
       b.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-      button1ActionPerformed(  );
+      button2ActionPerformed(  );
       }}); 
       
       JButton c = new JButton();
       c.setForeground(new Color(0,90,139));
-      c.setText("<html><center>"+ "Lot C" +"<br/>"+ spacesAvailableLotC + " Spaces available");
+      c.setText("<html><center>"+ "Lot D" +"<br/>"+ spacesAvailableLotC + " Spaces available");
       c.setFont(font);
       c.setBackground(Color.WHITE);
-      c.setBorderPainted(false);
+      //c.setBorderPainted(false);
        setParkingIcon(c,spacesAvailableLotC ,MAX_CAPACITY_C);
      
       c.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-      button1ActionPerformed(  );
+      button3ActionPerformed(  );
       }}); 
       
       JButton d = new JButton();
       d.setForeground(new Color(0,90,139));
-      d.setText("<html><center>"+ "Lot D" +"<br/>"+ spacesAvailableLotD + " Spaces available");
+      d.setText("<html><center>"+ "Bayside Parking Lot" +"<br/>"+ spacesAvailableLotD + " Spaces available");
       d.setFont(font);
       d.setBackground(Color.WHITE);
-      d.setBorderPainted(false); 
+      //d.setBorderPainted(false); 
       setParkingIcon(d,spacesAvailableLotD,MAX_CAPACITY_D);
  
       d.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-      button1ActionPerformed(  );
+      button4ActionPerformed(  );
       }});
           
         
@@ -124,7 +132,7 @@ public class ParkingInfoPage extends JFrame {
         new  ParkingInfoPage ();
      }
     
-    private static void    setParkingIcon(JButton b,double x,final int y){
+    private static void setParkingIcon(JButton b,double x,final int y){
      
    
      if(x ==  y){
@@ -177,8 +185,64 @@ public class ParkingInfoPage extends JFrame {
       }
       private  void button1ActionPerformed() {
    
-      //dummyFrame x = new dummyFrame(); 
-      dispose();
+      //dummyFrame x = new dummyFrame();
+      ArrayList<String> y = new ArrayList<String>();
+        y.add("Puddles");
+        y.add("Potholes");
+        y.add("Construction");
+        parkinglot p = new parkinglot("Campus Center Lot", "6:30am - 11:00pm", MAX_CAPACITY_A, (MAX_CAPACITY_A - spacesAvailableLotA), 34, 
+                                    false, false, true, true, y); 
+        infoFrame i = new infoFrame(p);
+        //ParkingInfoPage cur = this;
+        //this.getContentPane
+      //dispose();
+      }
+
+      private  void button2ActionPerformed() {
+   
+      //dummyFrame x = new dummyFrame();
+      ArrayList<String> y = new ArrayList<String>();
+        y.add("Puddles");
+        y.add("Potholes");
+        y.add("Construction");
+      parkinglot p = new parkinglot("Clark Athletic Center Lot", "6:30am - 11:00pm", MAX_CAPACITY_B, (MAX_CAPACITY_B - spacesAvailableLotB), 5, 
+                                    false, false, true, true, y); 
+        infoFrame i = new infoFrame(p);
+        //ParkingInfoPage cur = this;
+        //this.getContentPane
+      //dispose();
+      
+      }
+
+      private  void button3ActionPerformed() {
+   
+      //dummyFrame x = new dummyFrame();
+      ArrayList<String> y = new ArrayList<String>();
+        y.add("Puddles");
+        y.add("Potholes");
+        y.add("Construction");
+      parkinglot p = new parkinglot("Lot D", "6:30am - 11:00pm", MAX_CAPACITY_C, (MAX_CAPACITY_C - spacesAvailableLotC), 30, 
+                                    false, false, true, true, y); 
+        infoFrame i = new infoFrame(p);
+        //ParkingInfoPage cur = this;
+        //this.getContentPane
+      //dispose();
+      
+      }
+
+      private  void button4ActionPerformed() {
+   
+      //dummyFrame x = new dummyFrame();
+      ArrayList<String> y = new ArrayList<String>();
+        y.add("Puddles");
+        y.add("Potholes");
+        y.add("Construction");
+        parkinglot p = new parkinglot("Bayside Parking Lot", "6:30am - 11:00pm", MAX_CAPACITY_D, (MAX_CAPACITY_D - spacesAvailableLotD), 100, 
+                                    false, false, true, true, y); 
+        infoFrame i = new infoFrame(p);
+        //ParkingInfoPage cur = this;
+        //this.getContentPane
+      //dispose();
       
       }
   
@@ -245,5 +309,3 @@ public class ParkingInfoPage extends JFrame {
         return 0;
     } 
   }
-  
-

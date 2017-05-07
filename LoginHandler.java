@@ -10,6 +10,8 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 
 /* This is a class to deal with login data. It is not necessary to construct an instance of this class; all methods
  * are static.
@@ -30,6 +32,14 @@ public class LoginHandler {
   //method to register/attempt to register a new user; returns true if successful, false otherwise
   public static boolean register(String emailAddress, String password) throws InvalidKeySpecException, IOException,
     NoSuchAlgorithmException {
+    
+    //make sure email address is valid
+    try {
+      new InternetAddress(emailAddress).validate();
+    } catch(AddressException e) {
+      return false;
+    }
+    
     //make sure email not already registered
     BufferedReader reader = new BufferedReader(new FileReader(DATABASE));
     String currentLine;

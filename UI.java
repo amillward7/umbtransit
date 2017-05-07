@@ -4,6 +4,7 @@ import java.awt.Font;
 final class UI {
   static final Color BLUE       = new Color(  0,  90, 139),
                      WHITE      = Color.WHITE,
+                     BLACK      = Color.BLACK,
                      LIGHT_BLUE = new Color(160, 207, 235),
                      RED        = new Color(163,  63,  31),
                      GOLD       = new Color(197, 146,  23),

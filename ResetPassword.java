@@ -1,10 +1,30 @@
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.*;
-import javax.swing.*;
-import javax.mail.*;
-import javax.mail.internet.*;
+import java.util.Properties;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+/*
+ * In order for this document to compile properly, you must have Oracle's JavaMail package in your classpath.
+ * This package can be found at <https://java.net/projects/javamail/pages/Home#Download_JavaMail_Release>.
+ */
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class ResetPassword extends JPanel {
   
@@ -45,7 +65,7 @@ public class ResetPassword extends JPanel {
         
         String emailAddress = emailField.getText();
         
-        //threading so that panel displays correctly while email is being sent
+        //threading so that waiting screen displays correctly while email is being sent
         new Thread(createRunnable(emailAddress)).start();
       }
     });
@@ -88,13 +108,15 @@ public class ResetPassword extends JPanel {
     c.weighty = 1;
     add(button, c);
     
-    setBorder(BorderFactory.createMatteBorder(6,6,6,6, Color.BLACK));
+    setBorder(BorderFactory.createMatteBorder(6,6,6,6, UI.BLACK));
   }
   
+  //this method allows the actual sending of the email to be threaded
   private Runnable createRunnable(final String toAddress) {
     return new Runnable() {
       public void run() {
-        // Try to send an email to the specified address; display a positive message for success and negative for failure.
+        // Try to send an email to the specified address;
+        // display a positive message for success and negative for failure.
         try {
           if(LoginHandler.isInDatabase(toAddress)) {
             sendResetEmailTo(toAddress);
@@ -111,23 +133,12 @@ public class ResetPassword extends JPanel {
     };
   }
   
-  private void createAndShowGUI() {
-    frame = new JFrame("Reset Password");
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    
-    frame.add(this);
-    
-    frame.pack();
-    frame.setBounds(300, 150, 450, 750);
-    frame.setVisible(true);
-  }
-  
-  private static class SMTPAuthenticator extends Authenticator {
+  //this class allows emails to be sent through the umb.transit.app@gmail.com address
+  private static class EmailAuthenticator extends Authenticator {
     private PasswordAuthentication authentication;
-    public SMTPAuthenticator(String login, String password) {
+    public EmailAuthenticator(String login, String password) {
       authentication = new PasswordAuthentication(login, password);
     }
-    @Override
     protected PasswordAuthentication getPasswordAuthentication() {
       return authentication;
     }
@@ -135,18 +146,20 @@ public class ResetPassword extends JPanel {
   
   private static void sendResetEmailTo(String toAddress) throws MessagingException {
     String fromAddress = "umb.transit.app@gmail.com";
+    
+    //SMTP properties for GMail
     Properties props = System.getProperties();
     props.setProperty("mail.host", "smtp.gmail.com");
     props.setProperty("mail.smtp.port", "587");
     props.setProperty("mail.smtp.auth", "true");
     props.setProperty("mail.smtp.starttls.enable", "true");
     
-    Authenticator auth = new SMTPAuthenticator("umb.transit.app@gmail.com", "TheSevenDwarves");
+    Authenticator auth = new EmailAuthenticator("umb.transit.app@gmail.com", "TheSevenDwarves");
     
     Session session = Session.getDefaultInstance(props, auth);
     
     try {
-      MimeMessage message = new MimeMessage(session);
+      Message message = new MimeMessage(session);
       message.setFrom(new InternetAddress(fromAddress));
       message.addRecipient(Message.RecipientType.TO, new InternetAddress(toAddress));
       message.setSubject("Reset Password");
@@ -154,7 +167,6 @@ public class ResetPassword extends JPanel {
       
       Transport.send(message);
     } catch(MessagingException mex) {
-      mex.printStackTrace();
       throw(mex);
     }
   }

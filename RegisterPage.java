@@ -14,7 +14,7 @@ public class RegisterPage extends JFrame {
   
   
 //instantiation
-  JLabel userLabel = new JLabel("Username:");
+  JLabel userLabel = new JLabel("Email Address:");
   JLabel passLabel = new JLabel("Password:");
   JLabel firstLabel = new JLabel("First Name:");
   JLabel lastLabel = new JLabel("Last Name:");
@@ -57,22 +57,22 @@ public class RegisterPage extends JFrame {
     lastLabel.setBounds(30,120,80,20);
     
     
-//add "parts" to the window
+    //add "parts" to the window
     panel.add(submit);   //add the "submit" button
     
-//text boxes
+    //text boxes
     panel.add(user);   //add the username text box
     panel.add(pass);     //add password text box
     panel.add(firstName); //add first name text box
     panel.add(lastName);  //add last name text box
     
-//labels
+    //labels
     panel.add(userLabel);   //add "Username" label
     panel.add(passLabel);   //add "Password" label
     panel.add(firstLabel);   //add "First Name" label
     panel.add(lastLabel);   //add "Last Name" label
     
-//frame operations
+    //frame operations
     getContentPane().add(panel);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
